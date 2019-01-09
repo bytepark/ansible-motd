@@ -1,5 +1,6 @@
 ---
 language: python
+services: docker
 python: "2.7"
 
 env:
@@ -20,14 +21,14 @@ install:
 
 script:
   # Basic role syntax check
-  - ansible-playbook tests/$PLAYBOOK -i inventory --syntax-check
+  - ansible-playbook tests/$PLAYBOOK -i tests/inventory --syntax-check
 
   # Initial run
-  - ansible-playbook tests/$PLAYBOOK -i inventory --connection=local --sudo
+  - ansible-playbook tests/$PLAYBOOK -i tests/inventory --connection=local --become
 
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
-    ansible-playbook tests/$PLAYBOOK -i inventory --connection=local --sudo
+    ansible-playbook tests/$PLAYBOOK -i tests/inventory --connection=local --become
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)

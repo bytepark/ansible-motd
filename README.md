@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bytepark/ansible-motd.svg?branch=master)](https://travis-ci.org/bytepark/ansible-motd)
+
 ansible-motd
 =========
 
